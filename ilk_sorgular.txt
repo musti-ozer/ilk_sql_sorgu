@@ -1,0 +1,22 @@
+a)--employees tablosundan istenilen kolonların sorgusu
+select first_name, last_name, salary 
+from employees;
+
+b)--employees tablosunda aynı departmanlarda çalışanları gösteren sorgu
+select distinct department_id 
+from employees;
+
+c)--employees tablosunda ,dedepartment_id'si 6 olanlar IT Departmanında çalışanlar, 
+IT departmanında çalışanların sorgusu
+select * from employees 
+where department_id = 6;
+
+d)--employees tablosunun maaş kolonuna göre yüksek maaştan düşük maaşa sıralayan sorgu
+select * from employees 
+order by salary desc;
+
+e)--employees tablosunda seçilen iki kolunun, araya boşluk eklenerek, 
+--birleşrilip takma isimle oluşturan sorgu
+select first_name || ' ' ||last_name as full_name
+from employees;
+
