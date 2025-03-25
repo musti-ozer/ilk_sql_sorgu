@@ -1,0 +1,27 @@
+--invoice tablosundaki bütün sütünlardaki null değerinin sayısı çalıştıran sorgu. satır sayısı 209
+SELECT COUNT(*) 
+FROM INVOICE
+WHERE billing_state IS NULL
+OR invoice_id IS NULL
+OR customer_id IS NULL
+OR invoice_date IS NULL
+OR billing_address IS NULL
+OR billing_city IS NULL
+OR billing_country IS NULL
+OR billingpostal_code IS NULL
+OR total IS NULL;
+
+--invoice tablosunda total tablosunun iki katının alınması ve total ile gösteren sorgu
+SELECT total, total * 2 AS total_cift
+FROM invoice
+ORDER BY total_cift DESC;
+
+
+-- adresleri soldan  birim, sağdan birim alıp, birleştiren ve istenilen tarihe göre açık adresi gösteren sorgu 
+SELECT billing_address, 
+CONCAT(SUBSTRING(billing_address FROM 1 FOR 3),
+SUBSTRING(billing_address FROM LENGTH(billing_address) - 3 FOR 4)) AS "Açık Adres"
+FROM INVOICE
+WHERE
+EXTRACT(YEAR FROM invoice_date) = 2013
+AND EXTRACT(MONTH FROM invoice_date) = 8;
