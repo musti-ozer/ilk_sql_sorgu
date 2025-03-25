@@ -1,0 +1,23 @@
+--"invoice" tablosunda “USA” ülkesine ait, 2009 yılı içerisinde oluşturulmuş 
+tüm faturaların (Invoice) toplamını listeleyen sorgu   //toplam faura tutarı 103.95
+SELECT SUM(total) AS total_amount
+FROM invoice
+WHERE billing_country = 'USA'
+AND EXTRACT(YEAR FROM invoice_date) = 2009;
+
+
+--Tüm parça (track) bilgilerini, bu parçaların ait olduğu playlisttrack ve playlist tablolarıyla birleştirerek
+(JOIN) listeleyen sorgu
+SELECT track.*, playlisttrack.*, playlist.*
+FROM track
+JOIN playlisttrack ON track.track_id = playlisttrack.track_id
+JOIN playlist ON playlisttrack.playlist_id = playlist.playlist_id;
+
+--"Let There Be Rock" adlı albüme ait tüm parçaları (Track) listeleyen, 
+sonuçları parça süresi (milliseconds) büyükten küçüğe sıralayıp gösteren sorgu //albümde 8 tane parça mevcut
+SELECT track.track_id, track.name, album.title, artist.name AS artist_name, track.milliseconds
+FROM track
+JOIN album ON track.album_id = album.album_id
+JOIN artist ON album.artist_id = artist.artist_id
+WHERE album.title = 'Let There Be Rock'
+ORDER BY track.milliseconds DESC;
